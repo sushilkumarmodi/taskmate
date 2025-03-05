@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { Header } from './components/Header';
+import { AddTask } from './components/AddTask';
+import { ShowTask } from './components/ShowTask';
+import { useState } from 'react'
 import './App.css';
 
 function App() {
+  const [task, setTask] = useState("");
+  const [tasklist, setTasklist] = useState(JSON.parse(localStorage.getItem('tasklist')) || []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();    
+
+    if(task){
+      const date = new Date();
+      setTasklist([...tasklist, {id: date.getTime(), name: task, time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`}]);
+      setTask("");
+    }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <AddTask handleSubmit={handleSubmit} taskList={task} setTask={setTask}/>
+      <ShowTask tasklist={tasklist} setTasklist={setTasklist}/>
     </div>
   );
 }
