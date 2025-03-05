@@ -1,4 +1,4 @@
-export const ShowTask = ({tasklist, setTasklist}) => {
+export const ShowTask = ({tasklist, setTasklist, handleEdit}) => {
   
   return (
     <section className="showTask">
@@ -16,7 +16,7 @@ export const ShowTask = ({tasklist, setTasklist}) => {
                             <span className="name">{task.name}</span>
                             <span className="time">{task.time}</span>
                         </p>                
-                        <i className="bi bi-pencil-square"></i>
+                        <i className="bi bi-pencil-square" onClick={() => handleEdit(task.id)}></i>
                         <i className="bi bi-trash"></i>
                     </li>
                 ))}        
