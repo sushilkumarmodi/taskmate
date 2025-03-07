@@ -25,7 +25,7 @@ function App() {
     if(task){
       const date = new Date();
       setTasklist([...tasklist, {id: date.getTime(), name: task, time: `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`}]);
-      setTask();
+      setTask("");
       console.log(task);
     }
   }
@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <AddTask handleSubmit={handleSubmit} editid={editid} taskList={task} setTask={setTask}/>
+      <AddTask handleSubmit={handleSubmit} editid={editid} task={task} setTask={setTask}/>
       <ShowTask tasklist={tasklist} setTasklist={setTasklist} handleEdit={handleEdit}/>
     </div>
   );
