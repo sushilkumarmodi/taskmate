@@ -6,7 +6,13 @@ import './App.css';
 
 function App() {
   const [task, setTask] = useState("");
-  const [tasklist, setTasklist] = useState(JSON.parse(localStorage.getItem('tasklist')) || []);
+  const [tasklist, setTasklist] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('tasklist')) || [];
+    } catch (e) {
+      return [];
+    }
+  });
   const [editid, setEditid] = useState(0);
 
   const handleSubmit = (event) => {
@@ -36,6 +42,11 @@ function App() {
     setEditid(id);
   }
 
+  const handleDelete = (id) => {
+    const updatedTaskList = tasklist.find(task => task.id !== id);
+    setTasklist(updatedTaskList);
+  }
+
   useEffect(() => {
     localStorage.setItem('tasklist', JSON.stringify(tasklist));
   }, [tasklist]);
@@ -44,7 +55,7 @@ function App() {
     <div className="App">
       <Header/>
       <AddTask handleSubmit={handleSubmit} editid={editid} task={task} setTask={setTask}/>
-      <ShowTask tasklist={tasklist} setTasklist={setTasklist} handleEdit={handleEdit}/>
+      <ShowTask tasklist={tasklist} setTasklist={setTasklist} handleEdit={handleEdit} handleDelete={handleDelete}/>
     </div>
   );
 }
