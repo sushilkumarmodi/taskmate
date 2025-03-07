@@ -54,7 +54,9 @@ function App() {
 
   return (
     <div className={"App "+ theme}>
-      <Header setTheme={setTheme} theme={theme}/>
+      <Header setTheme={setTheme} theme={theme}>
+        Taskmate
+      </Header>
       <AddTask handleSubmit={handleSubmit} editid={editid} task={task} setTask={setTask}/>
       <ShowTask tasklist={tasklist} setTasklist={setTasklist} handleEdit={handleEdit} handleDelete={handleDelete}/>
     </div>
