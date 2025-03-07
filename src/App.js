@@ -14,6 +14,7 @@ function App() {
     }
   });
   const [editid, setEditid] = useState(0);
+  const [theme, setTheme] = useState(JSON.parse(localStorage.getItem('theme')) || "medium");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,8 +53,8 @@ function App() {
   }, [tasklist]);
 
   return (
-    <div className="App">
-      <Header/>
+    <div className={"App "+ theme}>
+      <Header setTheme={setTheme} theme={theme}/>
       <AddTask handleSubmit={handleSubmit} editid={editid} task={task} setTask={setTask}/>
       <ShowTask tasklist={tasklist} setTasklist={setTasklist} handleEdit={handleEdit} handleDelete={handleDelete}/>
     </div>
